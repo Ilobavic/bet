@@ -192,10 +192,14 @@ async function analyze() {
   } catch (err) {
     console.error("PickAI error:", err);
     loader.classList.remove("on");
+    const friendly =
+      err.message === "API key not configured on server"
+        ? "API key is missing on the server. Add ANTHROPIC_API_KEY."
+        : err.message;
     results.innerHTML = `
       <div style="text-align:center;padding:50px 0;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#ef4444;">
         ⚠ Could not generate picks<br><br>
-        <span style="color:var(--muted);font-size:.68rem;">${err.message}</span><br><br>
+        <span style="color:var(--muted);font-size:.68rem;">${friendly}</span><br><br>
         <button onclick="analyze()" style="background:var(--s2);border:1px solid var(--border2);color:var(--text);padding:9px 20px;border-radius:7px;cursor:pointer;font-family:'Syne',sans-serif;font-size:.8rem;">Try Again</button>
       </div>`;
     results.classList.add("on");
