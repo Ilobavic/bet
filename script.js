@@ -153,12 +153,10 @@ async function analyze() {
     " - strictly no past or live matches\n- Prefer evening fixtures 18:00-22:00 WAT when available\n- Odds per match: low=1.25-1.65, medium=1.65-2.60, high=2.50-5.00\n- confidence: 58-91 (integer)\n- combined_odds = product of all odds rounded to 2 decimal places\n- potential_return = stake x combined_odds rounded to nearest 50\n- Make analysis feel genuine and data-driven";
 
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const res = await fetch("/api/analyze", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true",
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
